@@ -20,7 +20,14 @@ class Program
 
         // Create a Mat (matrix) object to store each video frame
         var frame = new Mat();
-        Console.WriteLine("Press 'c' to capture an image or 'q' to quit.");
+
+        // Create a boolean flag to control the live filter application
+        bool filterEnabled = false;
+
+        // User instructions
+        Console.WriteLine("Press 'c' to capture an image.");
+        Console.WriteLine("Press 'f' to toggle live filter.");
+        Console.WriteLine("Press 'q' to quit.");
 
         // Main loop for live video streaming
         while (true)
@@ -32,18 +39,26 @@ class Program
             if (frame.Empty())
                 break;
 
-            // Display the current frame in the OpenCV window
-            window.ShowImage(frame);
-
-            // Wait briefly for a key press (1 millisecond)
-            int key = Cv2.WaitKey(1);
-
-            // Applies live filter to the video feed
-            if (key == 'f')
+            // Apply filter if enabled
+            if (filterEnabled)
             {
                 var filteredFrame = new Mat();
                 Cv2.CvtColor(frame, filteredFrame, ColorConversionCodes.BGR2GRAY);
                 window.ShowImage(filteredFrame);
+            }
+            else
+            {
+                window.ShowImage(frame);
+            }
+
+            // Wait briefly for a key press (1 millisecond)
+            int key = Cv2.WaitKey(1);
+
+            // Applies live filter to the video feed if user presses 'f'
+            if (key == 'f')
+            {
+                filterEnabled = !filterEnabled; // toggle on/off
+                Console.WriteLine(filterEnabled ? "Filter ON" : "Filter OFF");
             }
 
             // Quit if the user presses 'q'
