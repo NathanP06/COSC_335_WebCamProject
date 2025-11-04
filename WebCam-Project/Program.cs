@@ -27,6 +27,7 @@ class Program
         // User instructions
         Console.WriteLine("Press 'c' to capture an image.");
         Console.WriteLine("Press 'g' to apply grey-scale.");
+        Console.WriteLine("Press 'r' to remove & reset filters.");
         Console.WriteLine("Press 'q' to quit.");
 
         // Main loop for live video streaming
