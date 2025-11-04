@@ -68,6 +68,7 @@ class FilterManager
     // Routes to the appropriate filter
     public static Mat ApplyFilter(Mat frame, string filterType)
     {
+        // Determine which filter to apply (similar to an "if" tree)
         switch (filterType)
         {
             case "grayscale":
