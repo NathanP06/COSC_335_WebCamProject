@@ -54,7 +54,7 @@ class Program
             if (key == 'c')
             {
                 // Save the current frame as an image
-                Cv2.ImWrite("captured.jpg", frame);
+                Cv2.ImWrite("captured.jpg", displayFrame);
                 Console.WriteLine("Image captured!");
             }
 
