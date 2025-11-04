@@ -27,6 +27,8 @@ class Program
         // User instructions
         Console.WriteLine("Press 'c' to capture an image.");
         Console.WriteLine("Press 'g' to apply grey-scale.");
+        Console.WriteLine("Press 'b' to apply blur.");
+        Console.WriteLine("Press 'r' to remove & reset filters.");
         Console.WriteLine("Press 'q' to quit.");
 
         // Main loop for live video streaming
@@ -47,11 +49,12 @@ class Program
 
             if (key == 'r') activeFilter = "none";
             if (key == 'g') activeFilter = "grayscale";
+            if (key == 'b') activeFilter = "blur";
 
             if (key == 'c')
             {
                 // Save the current frame as an image
-                Cv2.ImWrite("captured.jpg", frame);
+                Cv2.ImWrite("captured.jpg", displayFrame);
                 Console.WriteLine("Image captured!");
             }
 
@@ -65,10 +68,13 @@ class FilterManager
     // Routes to the appropriate filter
     public static Mat ApplyFilter(Mat frame, string filterType)
     {
+        // Determine which filter to apply (similar to an "if" tree)
         switch (filterType)
         {
             case "grayscale":
                 return ApplyGrayscale(frame);
+            case "blur":
+                return ApplyBlur(frame);
             default:
                 return frame.Clone();
         }
@@ -79,6 +85,14 @@ class FilterManager
     {
         var result = new Mat();
         Cv2.CvtColor(frame, result, ColorConversionCodes.BGR2GRAY);
+        return result;
+    }
+
+    // Blur filter
+    public static Mat ApplyBlur(Mat frame)
+    {
+        var result = new Mat();
+        Cv2.GaussianBlur(frame, result, new Size(15, 15), 0);
         return result;
     }
 }
