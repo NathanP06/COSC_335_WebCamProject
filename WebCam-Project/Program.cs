@@ -21,12 +21,12 @@ class Program
         // Create a Mat (matrix) object to store each video frame
         var frame = new Mat();
 
-        // Create a boolean flag to control the live filter application
-        bool filterEnabled = false;
+        // Create a boolean flag to control the greyscale live filter application
+        bool greyscale = false;
 
         // User instructions
         Console.WriteLine("Press 'c' to capture an image.");
-        Console.WriteLine("Press 'f' to toggle live filter.");
+        Console.WriteLine("Press 'g' to toggle grey-scale.");
         Console.WriteLine("Press 'q' to quit.");
 
         // Main loop for live video streaming
@@ -40,7 +40,7 @@ class Program
                 break;
 
             // Apply filter if enabled
-            if (filterEnabled)
+            if (greyscale)
             {
                 var filteredFrame = new Mat();
                 Cv2.CvtColor(frame, filteredFrame, ColorConversionCodes.BGR2GRAY);
@@ -55,10 +55,10 @@ class Program
             int key = Cv2.WaitKey(1);
 
             // Applies live filter to the video feed if user presses 'f'
-            if (key == 'f')
+            if (key == 'g')
             {
-                filterEnabled = !filterEnabled; // toggle on/off
-                Console.WriteLine(filterEnabled ? "Filter ON" : "Filter OFF");
+                greyscale = !greyscale; // toggle on/off
+                Console.WriteLine(greyscale ? "Filter activated" : "Filter disabled");
             }
 
             // Quit if the user presses 'q'
