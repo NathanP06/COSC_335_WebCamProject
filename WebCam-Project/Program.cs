@@ -45,16 +45,28 @@ class Program
             Mat displayFrame = FilterManager.ApplyFilter(frame, activeFilter);
             window.ShowImage(displayFrame);
 
+            // Wait for a key press
             int key = Cv2.WaitKey(1);
 
+            // Handle key presses for filter selection and image capture
             if (key == 'r') activeFilter = "none";
             if (key == 'g') activeFilter = "grayscale";
             if (key == 'b') activeFilter = "blur";
 
             if (key == 'c')
             {
-                // Save the current frame as an image
-                Cv2.ImWrite("captured.jpg", displayFrame);
+                string folderPath = @"C:\Users\natha\OneDrive\Documents\Coding Projects\C# Projects\COSC_335_WebCamProject\CapturedImages";
+
+                //Get the current date & time plus filter name for the filename
+                string timestamp = DateTime.Now.ToString("MM_dd_yyyy-HHmmss");
+                string filterName = activeFilter == "none" ? "original" : activeFilter;
+
+
+                string fileName = $"{timestamp}-{filterName}.jpg";
+                string fullPath = System.IO.Path.Combine(folderPath, fileName);
+
+                // Save the current frame (what is displayed) as an image
+                Cv2.ImWrite(fullPath, displayFrame);
                 Console.WriteLine("Image captured!");
             }
 
