@@ -38,6 +38,14 @@ class Program
             // Wait briefly for a key press (1 millisecond)
             int key = Cv2.WaitKey(1);
 
+            // Applies live filter to the video feed
+            if (key == 'f')
+            {
+                var filteredFrame = new Mat();
+                Cv2.CvtColor(frame, filteredFrame, ColorConversionCodes.BGR2GRAY);
+                window.ShowImage(filteredFrame);
+            }
+
             // Quit if the user presses 'q'
             if (key == 'q') break;
 
