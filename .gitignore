@@ -59,3 +59,5 @@ nunit-*.xml
 # Other files
 WebCam-Project.csproj
 COSC_335_WebCamProject.sln
+
+CapturedImages/
