@@ -14,7 +14,7 @@ class Program
         // Close the program if the webcam cannot be accessed
         if (!capture.IsOpened())
         {
-            Console.WriteLine("Error: Unable to access the webcam.");
+            Console.WriteLine("Error: Unable to access the webcam, ensure your webcam is connected properly.");
             return;
         }
 
@@ -43,7 +43,7 @@ class Program
                 Console.WriteLine("Error: No frame captured from webcam, quitting program.");
                 break;
             }
-            
+
             // Apply the selected filter dynamically
             Mat displayFrame = FilterManager.ApplyFilter(frame, activeFilter);
             window.ShowImage(displayFrame);
