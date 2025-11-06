@@ -49,7 +49,7 @@ When running, the app will open your default webcam (if available) and save capt
 
 ## Captured images
 
-- Captured images are saved into the repository folder `CapturedImages/` (relative to the repo root). Check that folder after running the program to verify output.
+- Captured images are saved into the repository folder `CapturedImages/` through an absolute path reference. Check that folder after running the program to verify output. Files are named based upon the date, timestamp, and activated filter (if no filter is activated, it is set to "None").
 
 ## Troubleshooting
 
