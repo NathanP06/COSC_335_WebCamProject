@@ -39,8 +39,11 @@ class Program
 
             // If no frame is captured, break the loop
             if (frame.Empty())
+            {
+                Console.WriteLine("Error: No frame captured from webcam, quitting program.");
                 break;
-
+            }
+            
             // Apply the selected filter dynamically
             Mat displayFrame = FilterManager.ApplyFilter(frame, activeFilter);
             window.ShowImage(displayFrame);
